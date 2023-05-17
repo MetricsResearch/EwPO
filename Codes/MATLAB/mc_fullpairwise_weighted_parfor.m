@@ -17,6 +17,8 @@ date_var = datestr(datetime('today'));
  sigma_list = [0,0.2,0.5,0.8];
  % correlations between residuals used to generate the data
  cov_list = [0,0.0391,0.2493,0.6397];
+ % number of repetitions
+ reps = 1000;
 
 
 %corr_matrix = zeros(length(sigma_list)*length(T_list)*2,2);
@@ -25,6 +27,7 @@ date_var = datestr(datetime('today'));
 %abs_dummy = 'True'; % or Abs
  
 parfor sample_size_ind = 1:length(T_list)
+T = T_list(sample_size_ind);
 corr_matrix = zeros(length(sigma_list)*2,2);
 beta_matrix = zeros(length(sigma_list)*2,2);
 test_stat = zeros(length(sigma_list), 1000);

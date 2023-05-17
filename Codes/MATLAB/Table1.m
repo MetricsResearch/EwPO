@@ -14,9 +14,8 @@ date_var = datestr(datetime('today'));
 significance_level = 0.05;
 
 % parameter sets
- T_list = [50, 500,1000, 5000];%[50, 500,1000, 5000]
+ T_list = [50, 500,1000, 5000];
  sigma_list = [0,0.2,0.5,0.8];
- %cov_list = [0,0.0071,0.0491,0.1272];
  cov_list = [0,0.0391,0.2493,0.6397];
  
  %sigma_list =[0];
@@ -25,10 +24,6 @@ significance_level = 0.05;
  %0.8 - 0.6397
  %0.5 - 0.2493
  %0.2 - 0.0391
-%        with sigma = 0.1
-% 0.0071 with sigma = 0.2
-% 0.0491 with sigma = 0.5
-% 0.1272 with sigma = 0.8
 
 
 %beta_matrix = zeros(length(sigma_list)*length(T_list)*2,2);
@@ -68,10 +63,7 @@ rand('seed',20230318);
 
 mu = zeros(1,reps+1);
 cov_matrix = zeros(reps+1);
-cov_matrix(:,:) = cov_list(sigma_ind); %0.1272;
-% 0.0071 with sigma = 0.2
-% 0.0491 with sigma = 0.5
-% 0.1272 with sigma = 0.8
+cov_matrix(:,:) = cov_list(sigma_ind);
 
 cov_matrix(1,:) = sigma;
 cov_matrix(:,1) = sigma;

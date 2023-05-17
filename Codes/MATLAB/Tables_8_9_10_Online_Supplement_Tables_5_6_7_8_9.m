@@ -1,4 +1,8 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% This code produces data for tables Tables 8, 9, and 10 of the paper (Appendix)%%%
+%%%%% and Tables 5,6,  7, 8, and 9 of the Online Supplement  %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %prepare WD
 clear all
@@ -16,14 +20,14 @@ digits(64)
 abs_dummy = 'True'; 
 % DGP
 dist = 'norm';
-run('mc_fullpairwise_deltax_parfor.m')
+run('mc_fullpairwise_weighted_parfor.m')
 
 % define parameter
 % simple weighted difference
 abs_dummy = 'False'; 
 % DGP
 dist = 'norm';
-run('mc_fullpairwise_deltax_parfor.m')
+run('mc_fullpairwise_weighted_parfor.m')
 
 %% Uniform DGP
 clear all
@@ -36,14 +40,14 @@ digits(64)
 abs_dummy = 'True'; 
 % DGP
 dist = 'uniform';
-run('mc_fullpairwise_deltax_parfor.m')
+run('mc_fullpairwise_weighted_parfor.m')
 
 % define parameter
 % simple weighted difference
 abs_dummy = 'False'; 
 % DGP
 dist = 'uniform';
-run('mc_fullpairwise_deltax_parfor.m')
+run('mc_fullpairwise_weighted_parfor.m')
 %%
 %Normal
  T_list = [50, 500, 5000];%[50, 500, 5000];

@@ -6,7 +6,7 @@ clc;
 
 
 alpha = 1;
-beta  = 0.5;
+beta  = 1.5;
 sigma = 1;
 xi = -sqrt(2/pi);
 
@@ -32,14 +32,14 @@ x = rand(T,1)*20-10;
 % error terms
 
 randn('seed',202101);
-%eps = normrnd(0,sigma, [T,reps]);  %generate (T x reps) matrix of normally distributed i.i.d. errors,
+eps = normrnd(0,sigma, [T,reps]);  %generate (T x reps) matrix of normally distributed i.i.d. errors,
     %with mean 0 and variance sigma^2
 
-Z_eps = normrnd(0,1, [T,reps]);
-tau_eps = abs(Z_eps);
-rand('seed',222022);
-U_eps = normrnd(0,1, [T,reps]);
-eps = xi + tau_eps + U_eps;
+%Z_eps = normrnd(0,1, [T,reps]);
+%tau_eps = abs(Z_eps);
+%rand('seed',222022);
+%U_eps = normrnd(0,1, [T,reps]);
+%eps = xi + tau_eps + U_eps;
     
 % dependent variables, in each of the repetitions
 
@@ -119,8 +119,6 @@ while r < reps+0.5
     number_of_betas = T * (T-1) /2;
     pairwise_betas = zeros(2,number_of_betas);
     delta_x = zeros(1,number_of_betas);
-    delta_y = zeros(1,number_of_betas);
-    length = zeros(1,number_of_betas);
     counter=1;
 
     % iterate over all pairs
@@ -129,8 +127,6 @@ while r < reps+0.5
             if i<j
                 % calculate x difference
                 delta_x(1, counter) = x(j,1) - x(i,1);
-                delta_y(1, counter) = y(j,r) - y(j,r);
-                length(1, counter) = sqrt(delta_x(1, counter)^2 + delta_y(1, counter)^2);
                 % calculate betahat
                 x_avg     = (x(i,1)+x(j,1))/2;
                 y_avg     = (y(i,r)+y(j,r))/2;
@@ -145,15 +141,19 @@ while r < reps+0.5
         end
     end
 
-    % Obtain the length weighted average of pairwise betas
+    % Obtain the delta-x weighted average of pairwise betas
     
-    inv_length = 1./length;
-    
-    sum_length = sum(length);
-    sum_inv_length = sum(inv_length);
-    weighted_parwise_betas = pairwise_betas*length';
-    weighted_average_parwise_betas = weighted_parwise_betas./sum_length;
+    %delta_x = abs(delta_x);
+    sum_delta_x = sum(delta_x);
+    weighted_parwise_betas = pairwise_betas*delta_x';
+    weighted_average_parwise_betas = weighted_parwise_betas./sum_delta_x;
     %weighted_average_parwise_betas = weighted_parwise_betas./number_of_betas;
+
+    %inv_delta_x = 1./delta_x;
+    %sum_inv_delta_x = sum(inv_delta_x);
+    %weighted_parwise_betas = pairwise_betas*inv_delta_x';
+    %weighted_average_parwise_betas = weighted_parwise_betas./sum_inv_delta_x;
+    %weighted_average_parwise_betas = weighted_parwise_betas./(T-1);
     
     % Simple average for beta_0
     %pairwise_betas = sum(pairwise_betas,2)./number_of_betas;
