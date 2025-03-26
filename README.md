@@ -7,5 +7,6 @@ Contribution by Gyorgy Ruzicska in the early stages of this project is kindly ac
 
 # Structure
 This repo has two folders. 
-    1. Codes - contains the codes used for all the Monte Carlo Experiments in the paper. 
-    2. Online_Supplement - contains the online appendix with additional Monte Carlo and theoretical results. 
+
+1. Codes - contains the codes used for all the Monte Carlo Experiments in the paper. 
+2. Online_Supplement - contains the online appendix with additional Monte Carlo and theoretical results. 
